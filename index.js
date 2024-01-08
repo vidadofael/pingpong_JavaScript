@@ -28,6 +28,13 @@ function draw() {
     canvasCtx.fillStyle = whiteCollor;
     canvasCtx.fillRect(window.innerWidth - lineWidth - 10, 600, widthRackets, heightRackets)
 
+    //drawing the game ball
+    /*  canvasCtx.beginPath();
+        canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
+        canvasCtx.fill();*/
+    canvasCtx.beginPath();
+    canvasCtx.arc(100, 200, 20, 0, 2 * Math.PI, false);
+    canvasCtx.fill();
 };
 
 //calling functions
