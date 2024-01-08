@@ -1,7 +1,8 @@
 const canvasEl = document.getElementById("canvas"),
-  canvasCtx = canvas.getContext("2d");
+    canvasCtx = canvas.getContext("2d"),
+    collorField = "#00745F",
+    gap = 12;
 
-const collorField = "#00745F";
 
 function setUp() {
   canvasEl.width = canvasCtx.width = window.innerWidth;
@@ -9,9 +10,6 @@ function setUp() {
 };
 
 //drawing rectangle
-
-
-
 function draw() {
     canvasCtx.fillStyle = collorField;
     canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
