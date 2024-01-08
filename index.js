@@ -1,7 +1,6 @@
 const canvasEl = document.getElementById("canvas"),
     canvasCtx = canvas.getContext("2d"),
-    collorField = "#00745F",
-    gap = 12;
+    collorField = "#015E4D";
 
 
 function setUp() {
