@@ -17,14 +17,17 @@ function draw() {
     canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
     //drawing the center line
+    //  canvasCtx.fillRect(x, y, whidth element, heigth element);
     canvasCtx.fillStyle = whiteCollor;
     canvasCtx.fillRect(window.innerWidth / 2 - lineWidth / 2, 0, lineWidth, window.innerHeight);
 
     //drawing the left racket of the game
+    //  canvasCtx.fillRect(x, y, whidth element, heigth element)
     canvasCtx.fillStyle = whiteCollor;
     canvasCtx.fillRect(10, 400, widthRackets, heightRackets)
 
     //drawing the right racket of the game
+    //  canvasCtx.fillRect(x, y, whidth element, heigth element)
     canvasCtx.fillStyle = whiteCollor;
     canvasCtx.fillRect(window.innerWidth - lineWidth - 10, 600, widthRackets, heightRackets)
 
