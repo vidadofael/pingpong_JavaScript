@@ -52,6 +52,19 @@
         }
     }
 
+    //Object RacketRight
+    //building the right racket as an object on the field
+    const rightPaddle = {
+        x: field.w - lineWidth - 10,
+        y: 600, //depois será de acordo com o movimento da bola do jogo
+        w: widthRackets,
+        h: heightRackets,
+        draw() {
+            canvasCtx.fillStyle = whiteCollor;
+            canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+        }
+    }
+
 
 
 function setUp() {
@@ -64,15 +77,13 @@ function draw() {
     field.draw()
     centerLine.draw()
     leftPaddle.draw()
+    rightPaddle.draw()
 
    
 
     
 
-    //drawing the right racket of the game
-    //  canvasCtx.fillRect(x, y, whidth element, heigth element)
-    canvasCtx.fillStyle = whiteCollor;
-    canvasCtx.fillRect(field.w - lineWidth - 10, 600, widthRackets, heightRackets)
+    
 
     //drawing the game ball
     /*  canvasCtx.beginPath();
