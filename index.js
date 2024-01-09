@@ -65,6 +65,21 @@
         }
     }
 
+    //drawing the game ball
+    /*  canvasCtx.beginPath();
+        canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
+        canvasCtx.fill();*/
+    const ball = {
+        x: 100,
+        y: 200,
+        r: 20,
+        draw: function() {
+            canvasCtx.beginPath();
+            canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+            canvasCtx.fill();
+        }
+
+    }
 
 
 function setUp() {
@@ -78,6 +93,7 @@ function draw() {
     centerLine.draw()
     leftPaddle.draw()
     rightPaddle.draw()
+    ball.draw()
 
    
 
@@ -85,13 +101,7 @@ function draw() {
 
     
 
-    //drawing the game ball
-    /*  canvasCtx.beginPath();
-        canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
-        canvasCtx.fill();*/
-    canvasCtx.beginPath();
-    canvasCtx.arc(100, 200, 20, 0, 2 * Math.PI, false);
-    canvasCtx.fill();
+   
 
     //drawing the game score
     //canvasCtx.fillText(name, x, y;
