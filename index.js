@@ -9,7 +9,7 @@ const canvasEl = document.getElementById("canvas"),
     const heightRackets = 200;
 
 
-    //Objects
+    //Object Field
     // building the field object
     const field =  {
         x: 0,
@@ -22,6 +22,21 @@ const canvasEl = document.getElementById("canvas"),
         }
     }
 
+    //Object Center Line
+    //building the center line
+    const centerLine = {
+        x: window.innerWidth / 2 - lineWidth / 2,
+        y: 0,
+        w: lineWidth,
+        h: field.h,
+        draw: function() {
+            //  canvasCtx.fillRect(x, y, whidth element, heigth element);
+            canvasCtx.fillStyle = whiteCollor;
+            canvasCtx.fillRect(this.x, this.y, this.w, this.h);
+        }
+    }
+
+    
 function setUp() {
   canvasEl.width = canvasCtx.width = field.w;
   canvasEl.height = canvasCtx.height = field.h;
@@ -30,11 +45,9 @@ function setUp() {
 //drawing rectangle
 function draw() {
     field.draw()
+    centerLine.draw()
 
-    //drawing the center line
-    //  canvasCtx.fillRect(x, y, whidth element, heigth element);
-    canvasCtx.fillStyle = whiteCollor;
-    canvasCtx.fillRect(window.innerWidth / 2 - lineWidth / 2, 0, lineWidth, window.innerHeight);
+   
 
     //drawing the left racket of the game
     //  canvasCtx.fillRect(x, y, whidth element, heigth element)
@@ -44,7 +57,7 @@ function draw() {
     //drawing the right racket of the game
     //  canvasCtx.fillRect(x, y, whidth element, heigth element)
     canvasCtx.fillStyle = whiteCollor;
-    canvasCtx.fillRect(window.innerWidth - lineWidth - 10, 600, widthRackets, heightRackets)
+    canvasCtx.fillRect(field.w - lineWidth - 10, 600, widthRackets, heightRackets)
 
     //drawing the game ball
     /*  canvasCtx.beginPath();
@@ -60,11 +73,11 @@ function draw() {
     canvasCtx.font = "bold 64px Arial";
     canvasCtx.textAlign = "center";
     canvasCtx.textBaseline = "top";
-    canvasCtx.fillText('3', window.innerWidth / 4, window.innerHeight - 120);
-    canvasCtx.fillText('6', window.innerWidth / 4 + window.innerWidth / 2, window.innerHeight - 120);
+    canvasCtx.fillText('3', field.w / 4, field.h - 120);
+    canvasCtx.fillText('6', field.w / 4 + field.w / 2, field.h - 120);
     canvasCtx.font = "bold 32px Arial";
-    canvasCtx.fillText('human', window.innerWidth / 4, window.innerHeight - 50);
-    canvasCtx.fillText('computer', window.innerWidth / 4 + window.innerWidth / 2, window.innerHeight - 50);
+    canvasCtx.fillText('human', field.w / 4, field.h - 50);
+    canvasCtx.fillText('computer', field.w / 4 + field.w / 2, field.h - 50);
 };
 
 //calling functions
