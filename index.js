@@ -90,26 +90,59 @@
         canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
         canvasCtx.fill();*/
     const ball = {
-        x: 50,
-        y: 50,
+        x: 0,
+        y: 0,
         r: 20,
 
         //speed of ball
-        speed: 2,
+        speed: 1.5,
+
+        //sets the direction of the game ball
+        directionY: 1,
+        directionX: 1,
+
+        //calculates the position of the game ball by checking whether it should change route (change x or y) when it hits the sides
+        _calcPosition: function() {
+            //
+
+            //this.y comes from the move function
+            //checks the position of the game ball so that the reversal can happen (top and bottom of the screen)
+            if(
+                (this.y - this.r < 0 && this.directionY < 0) ||
+                (this.y > field.h - this.r && this.directionY > 0)) {
+                this._reverseY()
+            }
+        },
+        //will reverse the value of Y so that the Y position of the game ball changes the direction of Y
+        _reverseY: function() {
+            this.directionY *= -1
+            // 1 * -1 = - 1
+            // -1 * -1 = 1
+        },
+        //will reverse the value of X so that the X position of the game ball changes the direction of X
+        _reverseX: function() {
+            this.directionX *= -1
+            // 1 * -1 = - 1
+            // -1 * -1 = 1
+        },
 
         //animate
         _move: function() {
-            this.x += 1 * this.speed;
-            this.y += 1 * this.speed;
+            this.x += this.directionX * this.speed;
+            this.y += this.directionY * this.speed;
         },
-
+        
+        
         draw: function() {
             canvasCtx.beginPath();
             canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
             canvasCtx.fill();
-
+            
             //every time the ball is drawn, the movement update is done here
             this._move()
+
+            //calls the function that guides the game ball so that it obeys the bouncing rules at the top and bottom of the screen
+            this._calcPosition()
         }
     }
     
