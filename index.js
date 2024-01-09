@@ -42,6 +42,7 @@ function draw() {
     canvasCtx.fill();
 
     //drawing the game score
+    //canvasCtx.fillText(name, x, y;
     canvasCtx.fillStyle = collorScore;
     canvasCtx.font = "bold 64px Arial";
     canvasCtx.textAlign = "center";
