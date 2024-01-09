@@ -70,7 +70,7 @@
     //building the right racket as an object on the field
     const rightPaddle = {
         x: field.w - lineWidth - 10,
-        y: 600, //depois será de acordo com o movimento da bola do jogo
+        y: 0, //depois será de acordo com o movimento da bola do jogo
         w: widthRackets,
         h: heightRackets,
 
@@ -87,15 +87,68 @@
 
     //drawing the game ball
     /*  canvasCtx.beginPath();
-        canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
-        canvasCtx.fill();*/
+    canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
+    canvasCtx.fill();*/
+
+    //drawing the game score
+    const score = {
+        position: "center",
+        basePosition: "top",
+
+        player1: "human",
+        player2: "computer",
+        
+        fontPlayer: "bold 32px Arial",
+
+        player1X: field.w / 4,
+        player2X: field.w / 4 + field.w / 2,
+        
+        player1Y: field.h - 50,
+        player2Y: field.h - 50,
+
+        scoreP1: 4,
+        scoreP2: 6,
+        
+        fontScore: "bold 64px Arial",
+
+        scoreP1X: field.w / 4,
+        scoreP2X: field.w / 4 + field.w / 2,
+
+        scoreP1Y: field.h - 120,
+        scoreP2Y: field.h - 120,
+        
+        increaseHuman: function() {
+            this.scoreP1++
+        },
+        increaseComputer: function() {
+            this.scoreP2++
+        },
+
+        draw: function() {
+            //canvasCtx.fillText(name, x, y;
+            canvasCtx.fillStyle = collorScore;
+            canvasCtx.font = this.fontScore;
+            canvasCtx.textAlign = this.position;
+            canvasCtx.textBaseline = this.basePosition;
+            
+            //points
+            canvasCtx.font = this.fontPlayer;
+            canvasCtx.fillText(this.player1, this.player1X, this.player1Y);
+            canvasCtx.fillText(this.player2, this.player2X, this.player2Y);
+
+            //player name
+            canvasCtx.font = this.fontScore;
+            canvasCtx.fillText(this.scoreP1, this.scoreP1X, this.scoreP1Y);
+            canvasCtx.fillText(this.scoreP2, this.scoreP2X, this.scoreP2Y);
+        }
+    }
     const ball = {
         x: 0,
         y: 0,
         r: 20,
 
         //speed of ball
-        speed: 1.5,
+        speed: 5,
 
         //sets the direction of the game ball
         directionY: 1,
@@ -103,7 +156,36 @@
 
         //calculates the position of the game ball by checking whether it should change route (change x or y) when it hits the sides
         _calcPosition: function() {
-            //
+            //checking whether the player scored a point (x > field width)
+            if(this.x > field.w - this.r - rightPaddle.w - gapX) {
+                //checks if the right racket is in the y position of the game ball
+                if(this.y + this.r > rightPaddle.y &&
+                    this.y - this.r < rightPaddle.y + rightPaddle.h
+                ) {
+                    //hits the racket
+                    this._reverseX()
+                } else {
+                    //increase one point to the player
+                    score.increaseHuman()
+                    this._pointUp()
+                }
+            }
+
+            //checking whether the player scored a point ( x < 0)
+            if( this.x < this.r + leftPaddle.w + gapX ) {
+                //check if the left racket is in position y of the ball
+                if (
+                    this.y + this.r > leftPaddle.y &&
+                    this.y - this.r < leftPaddle.y + leftPaddle.h)
+                    {
+                        //hits the ball and reverses the x direction
+                        this._reverseX()
+                    } else {
+                        score.increaseComputer()
+                        this._pointUp()
+                    }
+
+            }
 
             //this.y comes from the move function
             //checks the position of the game ball so that the reversal can happen (top and bottom of the screen)
@@ -126,6 +208,11 @@
             // -1 * -1 = 1
         },
 
+        _pointUp: function() {
+            this.x = field.w / 2  
+            this.y = field.h / 2
+        },
+
         //animate
         _move: function() {
             this.x += this.directionX * this.speed;
@@ -146,51 +233,6 @@
         }
     }
     
-    //drawing the game score
-    const score = {
-        position: "center",
-        basePosition: "top",
-
-        player1: "human",
-        player2: "computer",
-        
-        fontPlayer: "bold 32px Arial",
-
-        player1X: field.w / 4,
-        player2X: field.w / 4 + field.w / 2,
-        
-        player1Y: field.h - 50,
-        player2Y: field.h - 50,
-
-        scoreP1: "3",
-        scoreP2: "6",
-        
-        fontScore: "bold 64px Arial",
-
-        scoreP1X: field.w / 4,
-        scoreP2X: field.w / 4 + field.w / 2,
-
-        scoreP1Y: field.h - 120,
-        scoreP2Y: field.h - 120,
-        
-        draw: function() {
-            //canvasCtx.fillText(name, x, y;
-            canvasCtx.fillStyle = collorScore;
-            canvasCtx.font = this.fontScore;
-            canvasCtx.textAlign = this.position;
-            canvasCtx.textBaseline = this.basePosition;
-            
-            //points
-            canvasCtx.font = this.fontPlayer;
-            canvasCtx.fillText(this.player1, this.player1X, this.player1Y);
-            canvasCtx.fillText(this.player2, this.player2X, this.player2Y);
-
-            //player name
-            canvasCtx.font = this.fontScore;
-            canvasCtx.fillText(this.scoreP1, this.scoreP1X, this.scoreP1Y);
-            canvasCtx.fillText(this.scoreP2, this.scoreP2X, this.scoreP2Y);
-        }
-    }
 
 
 function setUp() {
