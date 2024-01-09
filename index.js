@@ -70,13 +70,26 @@
         canvasCtx.arc(x, y, r, 0, 2 * Math.PI, false);
         canvasCtx.fill();*/
     const ball = {
-        x: 100,
-        y: 200,
+        x: 50,
+        y: 50,
         r: 20,
+
+        //speed of ball
+        speed: 10,
+
+        //animate
+        _move: function() {
+            this.x += 1 * this.speed;
+            this.y += 1 * this.speed;
+        },
+
         draw: function() {
             canvasCtx.beginPath();
             canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
             canvasCtx.fill();
+
+            //every time the ball is drawn, the movement update is done here
+            this._move()
         }
     }
     
@@ -135,13 +148,20 @@ function setUp() {
 //drawing rectangle
 function draw() {
     field.draw()
+
     centerLine.draw()
+
     leftPaddle.draw()
     rightPaddle.draw()
+
     ball.draw()
+
     score.draw()   
 };
 
 //calling functions
 setUp();
 draw();
+
+//animation update rule
+window.setInterval( draw, 1000 / 60);
