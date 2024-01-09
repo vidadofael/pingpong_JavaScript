@@ -159,10 +159,6 @@ function draw() {
     score.draw()   
 };
 
-//calling functions
-setUp();
-draw();
-
 //smoothing out the animation
 window.animateFrame = (function () {
     return (
@@ -172,7 +168,7 @@ window.animateFrame = (function () {
         window.oRequestAnimateFrame || //opera
         window.msRequestAnimateFrame || //microsoft explorer
         function (callback) {
-            return window.setTimeout(callback, 1000 / 60)
+            return window.setTimeout(callback, 1000 / 600)
         }
     )
 })();
