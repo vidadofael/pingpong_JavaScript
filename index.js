@@ -9,6 +9,11 @@
     const widthRackets = lineWidth;
     const heightRackets = 200;
 
+    //parameters for mouse movement to animate the left racket
+    const mouse = {
+        x: 0,
+        y: 0
+    }
 
     //Object Field
     // building the field object
@@ -44,11 +49,20 @@
         y: 360, //vai alterar com o movimento do mouse
         w: widthRackets,
         h: heightRackets,
+
+        //left paddle movement and centering the mouse
+        _move: function() {
+            this.y = mouse.y- this.h / 2
+        },
+
         draw: function() {
             //drawing the left racket of the game
             //  canvasCtx.fillRect(x, y, whidth element, heigth element)
             canvasCtx.fillStyle = whiteCollor;
             canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+
+            //calls the method to animate the left racket
+            this._move()
         }
     }
 
@@ -59,9 +73,15 @@
         y: 600, //depois será de acordo com o movimento da bola do jogo
         w: widthRackets,
         h: heightRackets,
+
+        //animating the right racket based on the movement of the game ball
+        _move: function() {
+            this.y = ball.y //In the future I need to update the rule so that the computer loses the game too
+        },
         draw() {
             canvasCtx.fillStyle = whiteCollor;
             canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+            this._move()
         }
     }
 
@@ -75,7 +95,7 @@
         r: 20,
 
         //speed of ball
-        speed: 10,
+        speed: 2,
 
         //animate
         _move: function() {
@@ -180,3 +200,11 @@ function main() {
 
 setUp()
 main()
+
+
+//paying mouse movement and setting x and y parameters
+canvasEl.addEventListener('mousemove', function(e) {
+    mouse.x = e.pageX
+    mouse.y = e.pageY
+    console.log(mouse)
+})
