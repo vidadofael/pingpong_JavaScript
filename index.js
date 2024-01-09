@@ -175,9 +175,12 @@ window.animateFrame = (function () {
             return window.setTimeout(callback, 1000 / 60)
         }
     )
-})
+})();
 
 function main() {
     animateFrame(main) //main = callback executada no setTimeout
     draw()
 }
+
+setUp()
+main()
