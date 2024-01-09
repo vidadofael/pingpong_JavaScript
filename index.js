@@ -1,8 +1,9 @@
-const canvasEl = document.getElementById("canvas"),
+    const canvasEl = document.getElementById("canvas"),
     canvasCtx = canvas.getContext("2d"),
     collorField = "#015E4D",
     whiteCollor = "#FFFFFF",
     collorScore = "#003027";
+    gapX =  10;
 
     const lineWidth = 15;
     const widthRackets = lineWidth;
@@ -36,7 +37,23 @@ const canvasEl = document.getElementById("canvas"),
         }
     }
 
-    
+    //Object RacketLeft
+    //building the left racket as an object on the field
+    const leftPaddle = {
+        x: gapX,
+        y: 360, //vai alterar com o movimento do mouse
+        w: widthRackets,
+        h: heightRackets,
+        draw: function() {
+            //drawing the left racket of the game
+            //  canvasCtx.fillRect(x, y, whidth element, heigth element)
+            canvasCtx.fillStyle = whiteCollor;
+            canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+        }
+    }
+
+
+
 function setUp() {
   canvasEl.width = canvasCtx.width = field.w;
   canvasEl.height = canvasCtx.height = field.h;
@@ -46,13 +63,11 @@ function setUp() {
 function draw() {
     field.draw()
     centerLine.draw()
+    leftPaddle.draw()
 
    
 
-    //drawing the left racket of the game
-    //  canvasCtx.fillRect(x, y, whidth element, heigth element)
-    canvasCtx.fillStyle = whiteCollor;
-    canvasCtx.fillRect(10, 400, widthRackets, heightRackets)
+    
 
     //drawing the right racket of the game
     //  canvasCtx.fillRect(x, y, whidth element, heigth element)
