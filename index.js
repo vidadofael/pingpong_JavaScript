@@ -8,15 +8,28 @@ const canvasEl = document.getElementById("canvas"),
     const widthRackets = lineWidth;
     const heightRackets = 200;
 
+
+    //Objects
+    // building the field object
+    const field =  {
+        x: 0,
+        y: 0,
+        w: window.innerWidth,
+        h: window.innerHeight,
+        draw: function() {
+            canvasCtx.fillStyle = collorField;
+            canvasCtx.fillRect(this.x, this.y, this.w, this.h);
+        }
+    }
+
 function setUp() {
-  canvasEl.width = canvasCtx.width = window.innerWidth;
-  canvasEl.height = canvasCtx.height = window.innerHeight;
+  canvasEl.width = canvasCtx.width = field.w;
+  canvasEl.height = canvasCtx.height = field.h;
 };
 
 //drawing rectangle
 function draw() {
-    canvasCtx.fillStyle = collorField;
-    canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    field.draw()
 
     //drawing the center line
     //  canvasCtx.fillRect(x, y, whidth element, heigth element);
