@@ -163,5 +163,21 @@ function draw() {
 setUp();
 draw();
 
-//animation update rule
-window.setInterval( draw, 1000 / 60);
+//smoothing out the animation
+window.animateFrame = (function () {
+    return (
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame || //google chrome
+        window.mozRequestAnimationFrame || //mozzila
+        window.oRequestAnimateFrame || //opera
+        window.msRequestAnimateFrame || //microsoft explorer
+        function (callback) {
+            return window.setTimeout(callback, 1000 / 60)
+        }
+    )
+})
+
+function main() {
+    animateFrame(main) //main = callback executada no setTimeout
+    draw()
+}
