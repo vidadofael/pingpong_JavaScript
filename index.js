@@ -78,7 +78,52 @@
             canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
             canvasCtx.fill();
         }
+    }
+    
+    //drawing the game score
+    const score = {
+        position: "center",
+        basePosition: "top",
 
+        player1: "human",
+        player2: "computer",
+        
+        fontPlayer: "bold 32px Arial",
+
+        player1X: field.w / 4,
+        player2X: field.w / 4 + field.w / 2,
+        
+        player1Y: field.h - 50,
+        player2Y: field.h - 50,
+
+        scoreP1: "3",
+        scoreP2: "6",
+        
+        fontScore: "bold 64px Arial",
+
+        scoreP1X: field.w / 4,
+        scoreP2X: field.w / 4 + field.w / 2,
+
+        scoreP1Y: field.h - 120,
+        scoreP2Y: field.h - 120,
+        
+        draw: function() {
+            //canvasCtx.fillText(name, x, y;
+            canvasCtx.fillStyle = collorScore;
+            canvasCtx.font = this.fontScore;
+            canvasCtx.textAlign = this.position;
+            canvasCtx.textBaseline = this.basePosition;
+            
+            //points
+            canvasCtx.font = this.fontPlayer;
+            canvasCtx.fillText(this.player1, this.player1X, this.player1Y);
+            canvasCtx.fillText(this.player2, this.player2X, this.player2Y);
+
+            //player name
+            canvasCtx.font = this.fontScore;
+            canvasCtx.fillText(this.scoreP1, this.scoreP1X, this.scoreP1Y);
+            canvasCtx.fillText(this.scoreP2, this.scoreP2X, this.scoreP2Y);
+        }
     }
 
 
@@ -94,26 +139,7 @@ function draw() {
     leftPaddle.draw()
     rightPaddle.draw()
     ball.draw()
-
-   
-
-    
-
-    
-
-   
-
-    //drawing the game score
-    //canvasCtx.fillText(name, x, y;
-    canvasCtx.fillStyle = collorScore;
-    canvasCtx.font = "bold 64px Arial";
-    canvasCtx.textAlign = "center";
-    canvasCtx.textBaseline = "top";
-    canvasCtx.fillText('3', field.w / 4, field.h - 120);
-    canvasCtx.fillText('6', field.w / 4 + field.w / 2, field.h - 120);
-    canvasCtx.font = "bold 32px Arial";
-    canvasCtx.fillText('human', field.w / 4, field.h - 50);
-    canvasCtx.fillText('computer', field.w / 4 + field.w / 2, field.h - 50);
+    score.draw()   
 };
 
 //calling functions
