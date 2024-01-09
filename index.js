@@ -106,8 +106,8 @@
         player1Y: field.h - 50,
         player2Y: field.h - 50,
 
-        scoreP1: 4,
-        scoreP2: 6,
+        scoreP1: 0,
+        scoreP2: 0,
         
         fontScore: "bold 64px Arial",
 
@@ -208,7 +208,14 @@
             // -1 * -1 = 1
         },
 
+        //increases the speed and level of the game every time the computer makes a point
+        _speedUp: function() {
+            this.speed += 3
+        },
+
+        //resets the starting position of the game ball to the center of the field
         _pointUp: function() {
+            this._speedUp()
             this.x = field.w / 2  
             this.y = field.h / 2
         },
