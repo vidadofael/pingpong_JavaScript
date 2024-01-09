@@ -1,7 +1,9 @@
 const canvasEl = document.getElementById("canvas"),
     canvasCtx = canvas.getContext("2d"),
     collorField = "#015E4D",
-    whiteCollor = "#FFFFFF";
+    whiteCollor = "#FFFFFF",
+    collorScore = "#003027";
+
     const lineWidth = 15;
     const widthRackets = lineWidth;
     const heightRackets = 200;
@@ -38,6 +40,17 @@ function draw() {
     canvasCtx.beginPath();
     canvasCtx.arc(100, 200, 20, 0, 2 * Math.PI, false);
     canvasCtx.fill();
+
+    //drawing the game score
+    canvasCtx.fillStyle = collorScore;
+    canvasCtx.font = "bold 64px Arial";
+    canvasCtx.textAlign = "center";
+    canvasCtx.textBaseline = "top";
+    canvasCtx.fillText('3', window.innerWidth / 4, window.innerHeight - 120);
+    canvasCtx.fillText('6', window.innerWidth / 4 + window.innerWidth / 2, window.innerHeight - 120);
+    canvasCtx.font = "bold 32px Arial";
+    canvasCtx.fillText('human', window.innerWidth / 4, window.innerHeight - 50);
+    canvasCtx.fillText('computer', window.innerWidth / 4 + window.innerWidth / 2, window.innerHeight - 50);
 };
 
 //calling functions
